@@ -123,6 +123,6 @@ public class UserServiceImpl implements UserService {
     }
 
     private Role buildRole(Integer roleId) {
-        return roleRepository.findById(roleId).get();
+        return roleRepository.findById(roleId).orElseThrow(() -> new RuntimeException("Role không tồn tại"));
     }
 }
