@@ -13,4 +13,6 @@ public interface RoleService {
     RoleDTO updateRole(UpdateRoleRequest updateRoleRequest);
 
     Page<Role> getAllRoles(GetListRoleRequest request);
+
+    void deleteRole(Integer id);
 }

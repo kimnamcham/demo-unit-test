@@ -22,6 +22,7 @@ public class Role {
     @Column(name = "name", length = 100)
     private String name;
 
+//    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL) => with cascade All, delete role will delete all user with role Id reference
     @OneToMany(mappedBy = "role")
     private Collection<User> users;
 

@@ -1,5 +1,7 @@
 package com.example.demouserrole.service;
 
+import com.example.demouserrole.constant.ErrorCodeDefs;
+import com.example.demouserrole.exception.JwtTokenExpired;
 import com.example.demouserrole.exception.JwtTokenInvalid;
 import com.example.demouserrole.model.UserDetailsImpl;
 import io.jsonwebtoken.*;
@@ -97,6 +99,6 @@ public class JwtTokenProvider {
         } catch (IllegalArgumentException e) {
             log.error("JWT claims string is empty: {}", e.getMessage());
         }
-        throw new JwtTokenInvalid("Jwt token invalid");
+        throw new JwtTokenInvalid(ErrorCodeDefs.getErrMsg(ErrorCodeDefs.TOKEN_INVALID));
     }
 }

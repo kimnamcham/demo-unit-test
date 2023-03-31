@@ -72,6 +72,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    @Override
     public Page<User> getAllUsers(GetListUserRequest request) {
         Specification<User> specification = CustomUserRepository.buildFilterSpecification(request.getKeyword());
         return userRepository.findAll(specification, PageRequest.of(request.getStart(), request.getLimit()));

@@ -89,4 +89,9 @@ public class RoleServiceImpl implements RoleService {
     private List<Permission> buildPermission(List<String> permissionIds) {
         return permissionRepository.findAllById(permissionIds);
     }
+
+    @Override
+    public void deleteRole(Integer id) {
+        roleRepository.deleteById(id);
+    }
 }

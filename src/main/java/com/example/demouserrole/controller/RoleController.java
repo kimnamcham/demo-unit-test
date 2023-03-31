@@ -5,6 +5,7 @@ import com.example.demouserrole.entity.Role;
 import com.example.demouserrole.request.role.CreateRoleRequest;
 import com.example.demouserrole.request.role.GetListRoleRequest;
 import com.example.demouserrole.request.role.UpdateRoleRequest;
+import com.example.demouserrole.response.BaseResponse;
 import com.example.demouserrole.service.RoleService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +29,26 @@ public class RoleController extends BaseController {
         this.roleService = roleService;
     }
 
-    @PostMapping("/create")
+    @PostMapping("")
     @PreAuthorize("hasAnyAuthority('CREATE_ROLE','ADMIN')")
     public ResponseEntity<?> create(@Valid @RequestBody CreateRoleRequest request) {
         RoleDTO response = roleService.createRole(request);
         return buildItemResponse(response);
     }
 
-    @PostMapping("/update")
+    @PutMapping("")
     @PreAuthorize("hasAnyAuthority('UPDATE_ROLE', 'ADMIN')")
     public ResponseEntity<?> update(@Valid @RequestBody UpdateRoleRequest request) {
         RoleDTO response = roleService.updateRole(request);
+        return buildItemResponse(response);
+    }
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('UPDATE_ROLE', 'ADMIN')")
+    public ResponseEntity<?> delete(@PathVariable("id") Integer id) {
+        BaseResponse response = new BaseResponse();
+        roleService.deleteRole(id);
+        response.setSuccess(true);
         return buildItemResponse(response);
     }
 
